@@ -14,6 +14,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { ExitFlypassParkingComponent } from './exit-flypass-parking/exit-flypass-parking.component';
 import { ToastrModule } from 'ngx-toastr';
+import {MatCardModule} from '@angular/material/card';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,7 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

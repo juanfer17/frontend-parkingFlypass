@@ -39,10 +39,10 @@ export class ExitFlypassParkingComponent implements OnInit{
         );
         this.form.reset();
       } else {
-        console.log('Form controls are null');
+        this.toastr.error('Datos de formulario nulos', 'Error');
       }
     } else {
-      console.log('Form is invalid');
+      this.toastr.error('Formulario invalido', 'Error');
     }
   }
 

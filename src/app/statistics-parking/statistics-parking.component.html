@@ -1,23 +1,47 @@
 <div class="form-container">
-  <form [formGroup]="form" (ngSubmit)="getAverageTransactions()">
-    <span>Selecciona un tipo de vehiculo</span>
-    <select formControlName="vehicleType">
-      <option value="AUTOMOVIL">Automóvil</option>
-      <option value="MOTOCICLETA">Motocicleta</option>
-      <option value="CAMIONETA">Camioneta</option>
-    </select>
-    <button type="submit">Enviar</button>
-  </form>
-  <div class="max-container">
-    <h2>Calcula el tiempo máximo de parqueo</h2>
-    <button style="margin-top: -20px" (click)="getMaxTimeService()">Tiempo máximo</button>
-  </div>
-  <div *ngIf="averageTransactionsResponse">
-    <pre>{{ averageTransactionsResponse}}</pre>
-  </div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Calcula el tiempo promedio de parqueo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="getAverageTransactions()">
+        <span>Selecciona un tipo de vehiculo</span>
+        <select formControlName="vehicleType">
+          <option value="AUTOMOVIL">Automóvil</option>
+          <option value="MOTOCICLETA">Motocicleta</option>
+          <option value="CAMIONETA">Camioneta</option>
+        </select>
+        <button type="submit">Enviar</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
 
-  <div *ngIf="maxTimeServiceResponse">
-    <pre>{{ maxTimeServiceResponse }}</pre>
-  </div>
+  <mat-card class="max-container">
+    <mat-card-header>
+      <mat-card-title>Calcula el tiempo máximo de parqueo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="max-container">
+        <button style="margin-top: -20px"(click)="getMaxTimeService()">Tiempo máximo</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="max-container" *ngIf="averageTransactionsResponse">
+    <mat-card-header>
+      <mat-card-title>Promedio de tiempo por tipo de vehiculo.</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <pre>{{ averageTransactionsResponse }}</pre>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="max-container" *ngIf="maxTimeServiceResponse">
+    <mat-card-header>
+      <mat-card-title>Tiempo máximo de parqueo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <pre>{{ maxTimeServiceResponse }}</pre>
+    </mat-card-content>
+  </mat-card>
 </div>
-

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ParkingFlypassService} from "../common/services/parkingFlypass";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-statistics-parking',
@@ -10,11 +11,12 @@ import {ParkingFlypassService} from "../common/services/parkingFlypass";
 export class StatisticsParkingComponent implements OnInit{
 
   constructor(private fb: FormBuilder,
-    private parkingFlypassService: ParkingFlypassService) {}
+    private parkingFlypassService: ParkingFlypassService,
+              private toastr: ToastrService) {}
 
   form: FormGroup = new FormGroup({});
-  averageTransactionsResponse: string = '';
-  maxTimeServiceResponse: string = '';
+  averageTransactionsResponse: any = '';
+  maxTimeServiceResponse: any = '';
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -32,18 +34,21 @@ export class StatisticsParkingComponent implements OnInit{
         this.parkingFlypassService.getAverageTransactions(vehicleTypeValue).subscribe(
           (response) => {
             console.log('Response from getAverageTransactions:', response);
+            this.toastr.success('Transacción exitosa', 'Éxito');
             this.averageTransactionsResponse = response.message;
+            this.hideCardsAfterDelay();
           },
           (error) => {
+            this.toastr.error('Error en la transacción', 'Error');
             console.error('Error from getAverageTransactions:', error);
           }
         );
         this.form.reset();
       } else {
-        console.log('Form controls are null');
+        this.toastr.error('Datos de formulario nulos', 'Error');
       }
     } else {
-      console.log('Form is invalid');
+      this.toastr.error('Formulario invalido', 'Error');
     }
   }
 
@@ -51,12 +56,22 @@ export class StatisticsParkingComponent implements OnInit{
     this.parkingFlypassService.getMaxTimeService().subscribe(
       (response) => {
         console.log('Response from getMaxTimeService:', response);
+        this.toastr.success('Transacción exitosa', 'Éxito');
         this.maxTimeServiceResponse = response.message;
+        this.hideCardsAfterDelay();
       },
       (error) => {
+        this.toastr.error('Error en la transacción', 'Error');
         console.error('Error from getMaxTimeService:', error);
       }
     );
+  }
+
+  hideCardsAfterDelay() {
+    setTimeout(() => {
+      this.averageTransactionsResponse = null;
+      this.maxTimeServiceResponse = null;
+    }, 10000);
   }
 
 }

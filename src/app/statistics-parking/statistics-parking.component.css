@@ -19,5 +19,5 @@ input,button{
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 25px;
 }
