@@ -13,6 +13,9 @@ export class StatisticsParkingComponent implements OnInit{
     private parkingFlypassService: ParkingFlypassService) {}
 
   form: FormGroup = new FormGroup({});
+  averageTransactionsResponse: string = '';
+  maxTimeServiceResponse: string = '';
+
   ngOnInit() {
     this.form = this.fb.group({
       vehicleType: ['', [Validators.required]]
@@ -29,11 +32,10 @@ export class StatisticsParkingComponent implements OnInit{
         this.parkingFlypassService.getAverageTransactions(vehicleTypeValue).subscribe(
           (response) => {
             console.log('Response from getAverageTransactions:', response);
-            // ... Manejar la respuesta aquí ...
+            this.averageTransactionsResponse = response;
           },
           (error) => {
             console.error('Error from getAverageTransactions:', error);
-            // ... Manejar el error aquí ...
           }
         );
         this.form.reset();
@@ -49,11 +51,10 @@ export class StatisticsParkingComponent implements OnInit{
     this.parkingFlypassService.getMaxTimeService().subscribe(
       (response) => {
         console.log('Response from getMaxTimeService:', response);
-        // ... Manejar la respuesta aquí ...
+        this.maxTimeServiceResponse = response;
       },
       (error) => {
         console.error('Error from getMaxTimeService:', error);
-        // ... Manejar el error aquí ...
       }
     );
   }

@@ -21,20 +21,7 @@ export class ParkingFlypassService {
       vehicleType: vehicleType
     }];
 
-    return this.http.post<AjaxResponse<any>>(url, requestTransactionCreate);
-  }
-
-  getAverageTransactions(vehicleType: string): Observable<any> {
-    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.average}`;
-    const requestStatisticsParkingDTO = [{
-      vehicleType: vehicleType
-    }];
-    return this.http.post(url, requestStatisticsParkingDTO);
-  }
-
-  getMaxTimeService(): Observable<any> {
-    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.max}`;
-    return this.http.post(url, {});
+    return this.http.post(url, requestTransactionCreate, { responseType: 'text' });
   }
 
   endTransaction(plate: string): Observable<any> {
@@ -42,7 +29,20 @@ export class ParkingFlypassService {
     const requestTransactionTerminated = [{
       plate: plate,
     }];
-    return this.http.post(url, requestTransactionTerminated);
+    return this.http.post(url, requestTransactionTerminated, { responseType: 'text' });
+  }
+
+  getAverageTransactions(vehicleType: string): Observable<any> {
+    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.average}`;
+    const requestStatisticsParkingDTO = {
+      vehicleType: vehicleType
+    };
+    return this.http.post(url, requestStatisticsParkingDTO);
+  }
+
+  getMaxTimeService(): Observable<any> {
+    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.max}`;
+    return this.http.post(url, {});
   }
 
 }

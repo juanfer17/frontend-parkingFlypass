@@ -13,7 +13,7 @@ import {RouterModule} from "@angular/router";
 import {ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { ExitFlypassParkingComponent } from './exit-flypass-parking/exit-flypass-parking.component';
-
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +30,7 @@ import { ExitFlypassParkingComponent } from './exit-flypass-parking/exit-flypass
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

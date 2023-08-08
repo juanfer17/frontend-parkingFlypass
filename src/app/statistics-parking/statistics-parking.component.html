@@ -8,8 +8,18 @@
     </select>
     <button type="submit">Enviar</button>
   </form>
-  <div>
-    <button (click)="getMaxTimeService()">Tiempo máxmimo</button>
+  <div class="max-container">
+    <h2>Calcula el tiempo máximo de parqueo</h2>
+    <button style="margin-top: -20px" (click)="getMaxTimeService()">Tiempo máximo</button>
+  </div>
+  <div *ngIf="averageTransactionsResponse">
+    <h2>Average Transactions:</h2>
+    <pre>{{ averageTransactionsResponse | json }}</pre>
+  </div>
+
+  <div *ngIf="maxTimeServiceResponse">
+    <h2>Max Time Service:</h2>
+    <pre>{{ maxTimeServiceResponse | json }}</pre>
   </div>
 </div>
 

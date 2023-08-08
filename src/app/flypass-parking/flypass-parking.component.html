@@ -1,6 +1,6 @@
 <div class="form-container">
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" formControlName="plate" placeholder="Placa">
+    <input type="text" formControlName="plate" placeholder="Placa" pattern="^.{1,6}$" [maxlength]="6">
     <span>Selecciona un tipo de vehiculo</span>
     <select formControlName="vehicleType">
       <option value="AUTOMOVIL">Automóvil</option>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ParkingFlypassService} from "../common/services/parkingFlypass";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-flypass-parking',
@@ -10,12 +11,14 @@ import {ParkingFlypassService} from "../common/services/parkingFlypass";
 export class FlypassParkingComponent implements OnInit{
 
   constructor(private fb: FormBuilder,
-  private parkingFlypassService: ParkingFlypassService
+  private parkingFlypassService: ParkingFlypassService,
+              private toastr: ToastrService
   ) {}
   form: FormGroup = new FormGroup({});
+  maxSixCharactersPattern = /^.{1,6}$/;
   ngOnInit() {
     this.form = this.fb.group({
-      plate: ['', [Validators.required]],
+      plate: ['', [Validators.required, Validators.pattern(this.maxSixCharactersPattern)]],
       vehicleType: ['', [Validators.required]]
     });
   }
@@ -28,23 +31,24 @@ export class FlypassParkingComponent implements OnInit{
       if (plateControl && vehicleTypeControl) {
         const plateValue = plateControl.value;
         const vehicleTypeValue = vehicleTypeControl.value;
+
         // Llamar al servicio para crear la transacción
         this.parkingFlypassService.createTransaction(plateValue, vehicleTypeValue).subscribe(
           response => {
-            console.log('Response from frontend service:', response);
-            // Resto del código de manejo de respuesta...
+            console.log('Respuesta del servicio frontend:', response);
+            this.toastr.success('Transacción creada exitosamente', 'Éxito');
+            this.form.reset();
           },
           error => {
-            console.error('Error from frontend service:', error);
-            // Resto del código de manejo de error...
+            console.error('Error del servicio frontend:', error);
+            this.toastr.error(error, 'Error');
           }
         );
-        this.form.reset();
       } else {
-        console.log('Form controls are null');
+        this.toastr.error('Los controles del formulario son nulos', 'Error de datos');
       }
     } else {
-      console.log('Form is invalid');
+      this.toastr.error('El formulario no es válido', 'Error de datos');
     }
   }
 

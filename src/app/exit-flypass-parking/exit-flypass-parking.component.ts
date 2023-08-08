@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ParkingFlypassService} from "../common/services/parkingFlypass";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-exit-flypass-parking',
@@ -10,13 +11,14 @@ import {ParkingFlypassService} from "../common/services/parkingFlypass";
 export class ExitFlypassParkingComponent implements OnInit{
 
   constructor(private fb: FormBuilder,
-              private parkingFlypassService: ParkingFlypassService
+              private parkingFlypassService: ParkingFlypassService,
+              private toastr: ToastrService
   ) {}
   form: FormGroup = new FormGroup({});
+  maxSixCharactersPattern = /^.{1,6}$/;
   ngOnInit() {
     this.form = this.fb.group({
-      plate: ['', [Validators.required]],
-      vehicleType: ['', [Validators.required]]
+      plate: ['', [Validators.required, Validators.pattern(this.maxSixCharactersPattern)]],
     });
   }
 
@@ -25,15 +27,14 @@ export class ExitFlypassParkingComponent implements OnInit{
       const plateControl = this.form.get('plate');
       if (plateControl) {
         const plateValue = plateControl.value;
-        // Llamar al servicio para crear la transacción
         this.parkingFlypassService.endTransaction(plateValue).subscribe(
           response => {
-            console.log('Response from frontend service:', response);
-            // Resto del código de manejo de respuesta...
+            console.log('Exitoso:', response);
+            this.toastr.success('Transacción exitosa', 'Éxito');
           },
           error => {
-            console.error('Error from frontend service:', error);
-            // Resto del código de manejo de error...
+            console.error('Error:', error);
+            this.toastr.error('Error en la transacción', 'Error');
           }
         );
         this.form.reset();
