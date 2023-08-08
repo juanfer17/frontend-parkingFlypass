@@ -10,12 +10,16 @@ import {MatButtonModule} from "@angular/material/button";
 import { FlypassParkingComponent } from './flypass-parking/flypass-parking.component';
 import { StatisticsParkingComponent } from './statistics-parking/statistics-parking.component';
 import {RouterModule} from "@angular/router";
+import {ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
+import { ExitFlypassParkingComponent } from './exit-flypass-parking/exit-flypass-parking.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FlypassParkingComponent,
-    StatisticsParkingComponent
+    StatisticsParkingComponent,
+    ExitFlypassParkingComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +28,8 @@ import {RouterModule} from "@angular/router";
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

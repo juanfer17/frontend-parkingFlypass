@@ -1,12 +1,17 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="flypassParking()">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="entryFlypassParking()">
     <mat-icon>add</mat-icon>
   </button>
-  <span>Flypass Parking</span>
+  <span>Entradas</span>
+
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="exitFlypassParking()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <span>Salidas</span>
 
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="statisticsParking()">
     <mat-icon>analytics</mat-icon>
   </button>
   <span>Estadisticas</span>
 </mat-toolbar>
-
+<router-outlet></router-outlet>

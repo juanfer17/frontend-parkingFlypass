@@ -12,8 +12,12 @@ export class AppComponent  implements OnInit{
   ngOnInit() {
   }
 
-  flypassParking() {
+  entryFlypassParking() {
     this.router.navigate(['/flypass-parking']);
+  }
+
+  exitFlypassParking() {
+    this.router.navigate(['/exit-flypass-parking']);
   }
 
   statisticsParking() {
