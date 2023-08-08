@@ -13,13 +13,11 @@
     <button style="margin-top: -20px" (click)="getMaxTimeService()">Tiempo máximo</button>
   </div>
   <div *ngIf="averageTransactionsResponse">
-    <h2>Average Transactions:</h2>
-    <pre>{{ averageTransactionsResponse | json }}</pre>
+    <pre>{{ averageTransactionsResponse}}</pre>
   </div>
 
   <div *ngIf="maxTimeServiceResponse">
-    <h2>Max Time Service:</h2>
-    <pre>{{ maxTimeServiceResponse | json }}</pre>
+    <pre>{{ maxTimeServiceResponse }}</pre>
   </div>
 </div>
 

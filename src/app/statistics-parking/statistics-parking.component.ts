@@ -32,7 +32,7 @@ export class StatisticsParkingComponent implements OnInit{
         this.parkingFlypassService.getAverageTransactions(vehicleTypeValue).subscribe(
           (response) => {
             console.log('Response from getAverageTransactions:', response);
-            this.averageTransactionsResponse = response;
+            this.averageTransactionsResponse = response.message;
           },
           (error) => {
             console.error('Error from getAverageTransactions:', error);
@@ -51,7 +51,7 @@ export class StatisticsParkingComponent implements OnInit{
     this.parkingFlypassService.getMaxTimeService().subscribe(
       (response) => {
         console.log('Response from getMaxTimeService:', response);
-        this.maxTimeServiceResponse = response;
+        this.maxTimeServiceResponse = response.message;
       },
       (error) => {
         console.error('Error from getMaxTimeService:', error);
