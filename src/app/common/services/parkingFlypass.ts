@@ -4,7 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../enviroments/enviroment";
 import {AjaxResponse} from "rxjs/internal/ajax/AjaxResponse";
-import {tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 
 
 @Injectable({
@@ -23,4 +23,26 @@ export class ParkingFlypassService {
 
     return this.http.post<AjaxResponse<any>>(url, requestTransactionCreate);
   }
+
+  getAverageTransactions(vehicleType: string): Observable<any> {
+    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.average}`;
+    const requestStatisticsParkingDTO = [{
+      vehicleType: vehicleType
+    }];
+    return this.http.post(url, requestStatisticsParkingDTO);
+  }
+
+  getMaxTimeService(): Observable<any> {
+    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.max}`;
+    return this.http.post(url, {});
+  }
+
+  endTransaction(plate: string): Observable<any> {
+    const url = `${environment.apiUrlService}/${environment.prefixUrl}/${environment.api}/${environment.terminate}`;
+    const requestTransactionTerminated = [{
+      plate: plate,
+    }];
+    return this.http.post(url, requestTransactionTerminated);
+  }
+
 }

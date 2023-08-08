@@ -5,5 +5,6 @@ export const environment = {
   api: 'transactions',
   create: 'create',
   average: 'average',
-  max: 'max'
+  max: 'max',
+  terminate: 'terminate'
 };

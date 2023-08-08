@@ -1,1 +1,7 @@
-<p>exit-flypass-parking works!</p>
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>Digite la placa para terminar la transacción.</label>
+    <input type="text" formControlName="plate" placeholder="Placa">
+    <button type="submit">Enviar</button>
+  </form>
+</div>

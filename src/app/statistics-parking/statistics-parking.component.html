@@ -1,1 +1,15 @@
-<p>statistics-parking works!</p>
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="getAverageTransactions()">
+    <span>Selecciona un tipo de vehiculo</span>
+    <select formControlName="vehicleType">
+      <option value="AUTOMOVIL">Automóvil</option>
+      <option value="MOTOCICLETA">Motocicleta</option>
+      <option value="CAMIONETA">Camioneta</option>
+    </select>
+    <button type="submit">Enviar</button>
+  </form>
+  <div>
+    <button (click)="getMaxTimeService()">Tiempo máxmimo</button>
+  </div>
+</div>
+
